@@ -1,0 +1,68 @@
+import java.util.ArrayList;
+
+public class Student {
+    public int[][] mark;
+
+    public Student(int[][] mark) throws Exception {
+        if (!this.CorrectMark(mark)) {
+            int[][] mark = null;
+            throw new Exception("Invalid marks!");
+        } else {
+            this.mark = mark;
+        }
+    }
+
+    private boolean CorrectMark(int[][] mark) {
+        for(int i = 0; i < mark.length; ++i) {
+            for(int j = 0; j < mark[i].length; ++j) {
+                if (mark[i][j] > 5 | mark[i][j] < 2) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public double AverageAll() {
+        if (this.mark == null) {
+            return 0.0D;
+        } else {
+            double sum = 0.0D;
+            int count = 0;
+
+            for(int i = 0; i < this.mark.length; ++i) {
+                for(int j = 0; j < this.mark[i].length; ++j) {
+                    sum += (double)this.mark[i][j];
+                    ++count;
+                }
+            }
+
+            double average = sum / (double)count;
+            return average;
+        }
+    }
+
+    public ArrayList<Double> AverageSem() {
+        if (this.mark == null) {
+            return null;
+        } else {
+            double sum = 0.0D;
+            int count = 0;
+            ArrayList<Double> Averagesem = new ArrayList();
+
+            for(int i = 0; i < this.mark.length; ++i) {
+                for(int j = 0; j < this.mark[i].length; ++j) {
+                    sum += (double)this.mark[i][j];
+                    ++count;
+                }
+
+                Averagesem.add(sum / (double)count);
+                sum = 0.0D;
+                count = 0;
+            }
+
+            return Averagesem;
+        }
+    }
+}
